@@ -142,7 +142,7 @@ fun EntryPoint(loginViewModel: EntryPointViewModel = viewModel()) {
                 horizontal = 10.dp
             )
         ) {
-            Text(text = "Enter username:")
+            Text(text = "Enter email:")
             BasicTextField(
                 state = username,
                 modifier = Modifier

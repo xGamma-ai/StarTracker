@@ -9,13 +9,12 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
 
-suspend fun loginRequest(username: String, userPassword: String) {
-    println("$username $userPassword")
+suspend fun loginRequest(userEmail: String, userPassword: String) {
     try {
         val response: HttpResponse = httpClient.request("/login") {
             method = HttpMethod.Post
             contentType(ContentType.Application.Json)
-            setBody(LoginDataClass(username, userPassword))
+            setBody(LoginDataClass(userEmail, userPassword))
         }
         println(response.status)
     } catch (e: Exception) {
