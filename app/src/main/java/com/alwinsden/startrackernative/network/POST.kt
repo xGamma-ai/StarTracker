@@ -2,6 +2,8 @@ package com.alwinsden.startrackernative.network
 
 import android.util.Log
 import com.alwinsden.startrackernative.serializers.LoginDataClass
+import com.alwinsden.startrackernative.serializers.UserPostLoginDetails
+import io.ktor.client.call.body
 import io.ktor.client.request.request
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
@@ -16,7 +18,8 @@ suspend fun loginRequest(userEmail: String, userPassword: String) {
             contentType(ContentType.Application.Json)
             setBody(LoginDataClass(userEmail, userPassword))
         }
-        println(response.status)
+        val json_response = response.body<UserPostLoginDetails>()
+        println(json_response.jwt_token)
     } catch (e: Exception) {
         Log.d("LOGIN_REQUEST", e.toString())
     }

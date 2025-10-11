@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -37,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.font.FontStyle
@@ -123,6 +126,7 @@ fun EntryPoint(loginViewModel: EntryPointViewModel = viewModel()) {
     val username = loginViewModel.userName
     val userPasswordState = loginViewModel.userPassword
     var healthStatus by remember { mutableStateOf("") }
+    var rememberCredsStatus by remember { mutableStateOf(false) }
     Column(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = 10.dp)
@@ -197,7 +201,25 @@ fun EntryPoint(loginViewModel: EntryPointViewModel = viewModel()) {
                 }
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Checkbox(
+                checked = rememberCredsStatus,
+                onCheckedChange = { it ->
+                    rememberCredsStatus = it
+                },
+                modifier = Modifier
+                    .scale(.8f),
+            )
+            Text(
+                text = "Remember login creds",
+                fontSize = 10.sp,
+                modifier = Modifier.clickable(onClick = {
+                    rememberCredsStatus = !rememberCredsStatus
+                })
+            )
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
