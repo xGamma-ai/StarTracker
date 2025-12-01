@@ -128,6 +128,7 @@ fun EntryPoint(loginViewModel: EntryPointViewModel = viewModel()) {
     var healthStatus by remember { mutableStateOf("") }
     var rememberCredsStatus by remember { mutableStateOf(false) }
     Column(modifier = Modifier.fillMaxSize()) {
+        Spacer(modifier = Modifier.height(20.dp))
         Column(
             modifier = Modifier.padding(horizontal = 10.dp)
         ) {
